@@ -1,7 +1,7 @@
 require "jwt"
 
 class AuthService
-  def self.register(username:, email:, password:, password_confirmation:, cpf:)
+  def self.register(username:, email:, cpf:, password:, password_confirmation:)
     raise ArgumentError, "Senhas não coincidem" if password != password_confirmation
 
 
@@ -10,9 +10,9 @@ class AuthService
     user = User.create!(
       username: username,
       email: email,
+      cpf: cpf,
       password: password,
-      password_digest: password_hashed,
-      cpf: cpf
+      password_digest: password_hashed
     )
 
     JWT.encode(user_id: user.id)
