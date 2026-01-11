@@ -1,37 +1,14 @@
 require "jwt"
 
 class AuthService
-  def self.register(username:, email:, cpf:, password:, password_confirmation:)
-    raise ArgumentError, "Senhas não coincidem" if password != password_confirmation
-
-
-    password_hashed = AuthPassword.password_coded(password)
-
-    user = User.create!(
-      username: username,
-      email: email,
-      cpf: cpf,
-      password: password,
-      password_digest: password_hashed
-    )
-
-    JWT.encode(user_id: user.id)
-
-    {
-      user: user,
-      token: token
-    }
+  def initialize(params)
+    @params = params
   end
 
-  def self.login(email, password)
-    user = User.find_by(email: params[:email])
 
-    if user&.authenticate(params[:password])
-      token = JWT.encode(user_id: user.id)
+  private
 
-      render json: { token: token }, status: :ok
-    else
-      render json: { token: "Email ou Senha inválido" }
-    end
+  def self.register(username: username, email: email, cpf: cpf, periodo: periodo, password: password, password_confirmation: password_confirmation)
+  raise Exception.new "Senhas incopatíveis", password != password_confirmation
   end
 end
