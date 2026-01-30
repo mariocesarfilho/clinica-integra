@@ -1,6 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
+      skipe_before_action :authorization_user, only: [ :create ]
       before_action :set_user, only: [ :show, :update, :destroy ]
 
       def index
@@ -13,11 +14,12 @@ module Api
       end
 
       def create
-        user = User.create(user_params)
+        user = User.new(user_params)
         if user.save
-          render json: user, status: :created
+          token = JasonWebToken.encode(user_id: user.id)
+          render json: { token: token, user: user }, status: :created
         else
-          render json: user.errors, status: :unprocessable_entity
+          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
