@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [ :show, :update, :create, :destroy ]
+      resources :users, only: [ :show, :update, :destroy ]
       post "/register", to: "auths#create"
     end
   end
