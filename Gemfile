@@ -8,8 +8,6 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
-#
-gem 'devise-jwt', '~> 0.12.1'
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 
@@ -28,6 +26,7 @@ gem "solid_queue"
 gem "solid_cable"
 
 # Reduces boot times through caching; required in config/boot.rb
+
 gem "bootsnap", require: false
 
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
