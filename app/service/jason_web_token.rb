@@ -12,6 +12,9 @@ class JasonWebToken
 
     HashWithIndifferentAccess.new(body)
 
+  rescue JWT::ExpiredSignature
+    :expired
   rescue JWT::DecodeError
+    :invalid
   end
 end
