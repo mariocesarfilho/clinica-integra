@@ -4,11 +4,12 @@ module Users
     def self.create(user_params)
       user = User.new(user_params)
       if user.save
-        token = JasonWebToken.encode(user)
+        token = JasonWebToken.encode(user_id: user.id)
+
         OpenStruct.new(
         success?: true,
         user: user,
-        token: user.token
+        token: token
         )
       else
         OpenStruct.new(
