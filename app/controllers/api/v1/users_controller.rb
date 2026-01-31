@@ -14,12 +14,11 @@ module Api
       end
 
       def create
-        user = User.new(user_params)
-        if user.save
-          token = JasonWebToken.encode(user_id: user.id)
-          render json: { token: token, user: user }, status: :created
+        user = Users::AuthService.create(user_params)
+        if user.success?
+          render json: { token: user.token, user: user.user }, status: :created
         else
-          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: user.errors }, status: :unprocessable_entity
         end
       end
 
@@ -45,10 +44,6 @@ module Api
 
       def user_params
         params.require(:user).permit(:username, :cpf, :periodo, :email, :password, :password_confirmation)
-      end
-
-      def set_password
-        params.require(:user).permit(:password, :password_confirmation, :current_password)
       end
     end
   end
