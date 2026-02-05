@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [ :show, :update, :destroy, :create ]
       post "/login", to: "sessions#login"
+      resources :patients, only: [ :show, :create, :destroy, :update ]
     end
   end
 end
