@@ -1,7 +1,8 @@
 module Api
   module V1
     class PatientsController < ApplicationController
-      before_action :only, set_patient: [ :update, :destroy, :show ]
+      skip_before_action :authorization_user, only: [ :create ]
+      before_action :set_patient, only: [ :update, :destroy, :show ]
 
       def index
         patients = Patient.all
@@ -16,9 +17,9 @@ module Api
         patient = Patients::PatientService.register(patient_params)
 
         if patient.success?
-          render json: { token: token, patient: patient }, status: :created
+          render json: { token: patient.token, patient: patient.patient }, status: :created
         else
-          render json: { errors: patient.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: patient.errors }, status: :unprocessable_entity
         end
       end
 
