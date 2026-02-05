@@ -6,16 +6,16 @@ module Patients
       patient = Patient.new(patient_params)
 
       if patient.success?
-        token = JasonWebToken.encode(user_id: patient.id)
+        token = JasonWebToken.encode(patient_id: patient.id)
         OpenStruct.new(
-          user: user,
+          patient: patient,
           token: token,
           success: true
         )
       else
         OpenStruct.new(
           success: false,
-          error: patient.errors
+          error: patient.errors.full_messages
         )
       end
     end
