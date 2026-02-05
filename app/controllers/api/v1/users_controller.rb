@@ -16,7 +16,7 @@ module Api
       def create
         user = Users::AuthService.create(user_params)
         if user.success?
-          render json: { token: user.token, user: user.user }, status: :created
+          render json: { user: user.user, token: user.token }, status: :created
         else
           render json: { errors: user.errors }, status: :unprocessable_entity
         end
