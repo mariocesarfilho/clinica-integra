@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_24_011723) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_24_013528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,12 +20,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_011723) do
   end
 
   create_table "peaples", force: :cascade do |t|
-    t.string "birth_date"
+    t.date "birth_date"
     t.string "cpf"
     t.datetime "created_at", null: false
-    t.string "date"
     t.string "email"
     t.string "name"
+    t.string "password_digest"
     t.string "phone"
     t.datetime "updated_at", null: false
   end
