@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TerapistController < ApplicationController
+    class TherapistsController < ApplicationController
       skip_before_action :authorization_therapist, only: [ :create ]
       before_action :set_therapist, only: [ :show, :update, :destroy ]
 
