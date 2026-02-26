@@ -29,7 +29,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_021810) do
     t.string "name"
     t.string "password_digest"
     t.string "phone"
-    t.string "role"
     t.datetime "updated_at", null: false
   end
 
