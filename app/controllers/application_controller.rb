@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::API
-  before_action :authorization_user
+  before_action :authorization_therapist
 
   private
 
-  def authorization_user
+  def authorization_therapist
     header = request.headers["Authorization"]
     token = header.split("").last if header
 
     decoded = JasonWebToken.decode(token)
 
     if decoded
-      @current_user = User.find(decoded[:user_id])
+      @current_therapist = Therapist.find(decoded[:therapist_id])
     else
       render json: { error: "Não Autorizado!" }, status: :unauthorized
     end
