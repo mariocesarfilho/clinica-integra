@@ -1,14 +1,14 @@
 module Api
   module V1
     class SessionsController < ApplicationController
-      skip_before_action :authorization_user, only: [ :create ]
+      skip_before_action :authorization_therapist, only: [ :create ]
 
 
       def create
-        user = User.find_by(email: params[:email])
+        therapist = Therapist.find_by(email: params[:email])
 
-        if user&.authenticate(params[:password])
-          token = JasonWebToken.encode(user_id: user.id)
+        if therapist&.authenticate(params[:password])
+          token = JasonWebToken.encode(therapist_id: therapist.id)
           render json: { token: token }, status: :ok
         else
           render json: { error: "Credenciais Inválidas" }, status: :unauthorized
